@@ -3,6 +3,8 @@ package com.example.demo; // <--- И ТУТ ТОЖЕ demo
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +43,23 @@ public class MainController {
     @GetMapping("/contacts")
     public String contacts(Model model) {
         return "contacts";
+    }
+
+    // Импорты добавятся сами, если нажмешь Alt+Enter на красном тексте
+    @PostMapping("/contact")
+    public String saveMessage(@RequestParam String name,
+                              @RequestParam String email,
+                              @RequestParam String message) {
+
+        // 1. Выводим то, что пришло, в консоль (чтобы ты видел)
+        System.out.println("---------------------------------");
+        System.out.println("НОВОЕ СООБЩЕНИЕ С САЙТА:");
+        System.out.println("От кого: " + name);
+        System.out.println("Почта: " + email);
+        System.out.println("Текст: " + message);
+        System.out.println("---------------------------------");
+
+        // 2. Перенаправляем пользователя обратно на главную страницу
+        return "redirect:/";
     }
 }
